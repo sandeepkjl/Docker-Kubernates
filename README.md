@@ -8,5 +8,5 @@ kubernates command in minikube.
 4. kubectl delete deployemnt/service <service-name> => to delete deployment/service
 
 to stop minikube.
-minikube stop
-minikube delete --all
+1 .minikube stop
+2. minikube delete --all
