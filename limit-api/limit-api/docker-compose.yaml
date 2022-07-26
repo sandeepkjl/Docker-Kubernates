@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  mysqllimitdbservice:
+    container_name: mysqllimitdb
+    image: mysql:8
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=Sandeep@123
+      - MYSQL_DATABASE=paymentdb
+    networks:
+      - demo-network
+  limit-service:
+    container_name: limit-api
+    image: limit-image
+    ports:
+      - 9091:9091
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqllimitdb:3306/paymentdb?allowPublicKeyRetrieval=true&useSSL=false
+    networks:
+      - demo-network
+    depends_on:
+      - mysqllimitdbservice
+
+networks:
+  demo-network:
+    external: true
